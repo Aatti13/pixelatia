@@ -12,7 +12,7 @@ const Logo = () => {
         <div className="small-circle lower"></div>
         <div className="circle lower"></div>
       </div>
-       <div className="text-3xl text-[var(--logo-clr)]">Pixelatia</div>
+       <div className="hidden lg:block text-3xl text-[var(--logo-clr)]">Pixelatia</div>
     </div>
   )
 }

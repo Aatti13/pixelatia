@@ -20,6 +20,8 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        dashboard: "bg-transparent hover:bg-[var(--logo-clr)] cursor-pointer",
+        login: "bg-black hover:bg-[var(--logo-clr)] cursor-pointer"
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",

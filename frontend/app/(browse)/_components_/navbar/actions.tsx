@@ -19,13 +19,13 @@ export const Actions = async () => {
       )}
       {!!user && (
         <div className="flex items-center">
-          <Button variant={"dashboard"} className="mr-9 ml-5">
-            <Link href={`/u/${user.username}`} className="flex items-center justify-around space-x-3">
+          <Button variant={"dashboard"} className="mr-3 ml-1 lg:mr-9 lg:ml-5">
+            <Link href={`/u/${user.username}`} className="flex items-center justify-around">
               <span className="hidden lg:block">Dashboard</span>
               <UserIcon className="h-5 w-5 lg:ml-1"/>
             </Link>
           </Button>
-          <UserButton afterSignOutUrl="/"/>
+          <div className="mr-3"><UserButton afterSignOutUrl="/"/></div>
         </div>
       )}
     </div>

@@ -39,7 +39,8 @@ export const Search = ()=>{
       focus-visible:ring-offset-0
       focus-visible:border-[#3B82F6]
       border-[#2D3748]
-      bg-[#1A1D23]"/>
+      bg-[#1A1D23]
+      min-w-[60px]"/>
       {value && (<X className="x-btn rounded-[50%] cursor-pointer hover:opacity-65" onClick={onClear}/>)}
 
       <Button className="rounded-l-none cursor-pointer hover:bg-[var(--logo-clr)]" type="submit"><SearchIcon/></Button>

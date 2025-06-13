@@ -78,6 +78,7 @@ html,body,:root {
   --sidebar-ring: oklch(0.708 0 0);
   /* --logo-clr: #ff7f9f; */
   --logo-clr: #3B82F6;
+  --nav-clr: #1C1F24;
 
   @apply bg-neutral-900/80;
 }
@@ -197,7 +198,7 @@ html,body,:root {
 
 .ripple {
   position: absolute;
-  width: 60px;
+  width: 50px;
   height: 20px;
   border: 3px solid var(--logo-clr);
   border-radius: 50%;
@@ -205,7 +206,7 @@ html,body,:root {
 }
 
 .ripple1 {
-  width: 45px;
+  width: 35px;
   height: 12px;
 }
 

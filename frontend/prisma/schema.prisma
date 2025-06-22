@@ -1,26 +1,31 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-model User {
-  id String @id @default(uuid())
-  username String @unique
-  imageURL String @db.Text
-  externalUserId String @unique
-  bio String? @db.Text
+model follow {
+  id          String   @id
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@unique([followerId, followingId], map: "Follow_followerId_followingId_key")
+  @@index([followerId], map: "Follow_followerId_idx")
+  @@index([followingId], map: "Follow_followingId_idx")
+}
+
+model user {
+  id             String   @id
+  username       String   @unique(map: "User_username_key")
+  bio            String?  @db.Text
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime
+  externalUserId String   @unique(map: "User_externalUserId_key")
+  imageURL       String   @db.Text
 }

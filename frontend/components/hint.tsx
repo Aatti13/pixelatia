@@ -21,7 +21,7 @@ export const Hint = ({
         <TooltipTrigger asChild={asChild}>
           {children}
         </TooltipTrigger>
-        <TooltipContent className="text-blue-500 bg-red-500" 
+        <TooltipContent className="text-white bg-[var(--logo-clr)]" 
         side={side} 
         align={align}>
           <p className="font-semibold">

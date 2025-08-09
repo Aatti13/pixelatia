@@ -1,4 +1,4 @@
-class BaseError extends Error {
+export class BaseError extends Error {
   constructor(message, statusCode=500, errorCode='INTERNAL_ERROR') {
     super(message);
     this.name = this.constructor.name;

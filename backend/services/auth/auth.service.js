@@ -7,6 +7,7 @@ import User from '../../models/auth/user.model.js';
 
 import { 
   ValidationError,
+  AuthenticationError,
   NotFoundError,
   ConflictingResponse,
   ServiceUnavailable 
@@ -58,6 +59,24 @@ class AuthService {
     }
   }
 
+  async loginService(userData) {
+    this._validateLoginData(userData);
+
+    const { email, password } = userData;
+
+    const user = await User.findOne({ email });
+    if(!user) {
+      throw new NotFoundError(`User with Email: ${email} not found`);
+    }
+
+    const comparePasswords = await bcrypt.compare(password, user.password);
+    if(!comparePasswords) {
+      throw new AuthenticationError('Incorrect Password');
+    }
+
+    return user;
+  }
+
   _validateUserData(userData) {
     const {
       email,
@@ -81,6 +100,19 @@ class AuthService {
     if(bio && bio.length > 255) {
       throw new ValidationError('Your bio can have a maximum of 255 characters');
     }
+  }
+
+  async _validateLoginData(userData) {
+    const { email, password } = userData;
+
+    if(!email, !password) {
+      throw new ValidationError('Both Fields are Mandatory');
+    }
+
+    if(!this.emailRegex.test(email)) {
+      return ValidationError('Invalid Email Format');
+    }
+
   }
 
   _generateUsername() {

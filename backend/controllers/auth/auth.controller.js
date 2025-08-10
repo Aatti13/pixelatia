@@ -1,7 +1,3 @@
-import bcrypt from 'bcrypt';
-import crypto from 'node:crypto';
-import jwt from 'jsonwebtoken';
-
 import AuthService from '../../services/auth/auth.service.js';
 
 import { BaseError } from '../../config/error/error.js';
@@ -9,9 +5,10 @@ import { BaseError } from '../../config/error/error.js';
 class AuthController {
   constructor() {
     this.authService = new AuthService();
+    this.register = this.register.bind(this);
   }
 
-  async register(req, res) {
+  register = async(req, res)=>{
     try {
       const {
         email,
@@ -21,16 +18,17 @@ class AuthController {
       } = req.body;
 
       this.authService._va
-      const newUser = await authService.registerService(req.body);
+      const newUser = await this.authService.registerService(req.body);
       
       const jwtToken = this.authService._generateJWTToken(newUser._id);
 
       return res.status(201).json({
         success: true,
         user:{
-          email,
-          bio,
-          gender
+          email: email,
+          username: newUser.username,
+          bio: newUser.bio,
+          gender: gender
         },
         jwtToken
       });
@@ -44,6 +42,7 @@ class AuthController {
         });
       }
 
+      console.error(error);
       return res.status(500).json({
         success: false,
         errorCode: 'INTERNAL_SERVER_ERROR',

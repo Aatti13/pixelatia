@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import { generateUsername } from 'unique-username-generator';
 
 import User from '../../models/auth/user.model.js';
+import Channel from '../../models/stream/channel.model.js';
 
 import { 
   ValidationError,
@@ -42,13 +43,18 @@ class AuthService {
     const hashedPassword = await bcrypt.hash(password, this.saltRounds);
 
     const username = this._generateUsername();
+    const newChannel = await Channel.create({
+      title: username,
+      description: bio,
+    })
 
     const newUser = new User({
       email,
       username,
       password: hashedPassword,
       bio,
-      gender
+      gender,
+      channel: newChannel._id
     });
 
     try {

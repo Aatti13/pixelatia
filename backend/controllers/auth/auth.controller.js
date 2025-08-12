@@ -19,7 +19,6 @@ class AuthController {
         gender
       } = req.body;
       const newUser = await this.authService.registerService(req.body);
-      
       const jwtToken = this.authService._generateJWTToken(newUser._id);
 
       return res.status(201).json({
@@ -28,7 +27,8 @@ class AuthController {
           email: email,
           username: newUser.username,
           bio: newUser.bio,
-          gender: gender
+          gender: gender,
+          channel: newUser.channel
         },
         jwtToken
       });
